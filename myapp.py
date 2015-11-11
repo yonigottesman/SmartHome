@@ -40,10 +40,23 @@ def requires_auth(f):
 def smartHome():
     return render_template('index.html', index_active="active")
 
-@app.route("/lights")
+@app.route("/home")
+@requires_auth
+def home():
+    return render_template('index.html', index_active="active")
+
+
+@app.route("/lights", methods=['GET', 'POST'])
 @requires_auth
 def lights():
-    return render_template('lights.html', lights_active="active")
+    if request.method == 'POST':
+        if (request.form['checked'] == "true"):
+            print "light on!"
+        else:
+            print "light off!"
+        return 'ok'
+    else:
+        return render_template('lights.html', lights_active="active",checked="")
 
 @app.route("/ac")
 @requires_auth

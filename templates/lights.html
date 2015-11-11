@@ -1,10 +1,23 @@
 {% extends "base.html" %}
 
 {% block body %}
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#toggle-light').change(function() {
+            $.post("{{ url_for('lights') }}",{checked:$(this).prop('checked')})
+        })
+    });
+</script>
 <div class="container">
   <div class="jumbotron">
     <h1>Controll lights</h1>      
-    <p>Controll lights </p>      
+    <p>Controll lights </p>
+    <input id="toggle-light" type="checkbox" {{checked}} data-toggle="toggle">
+    <div id="console-event"></div>
   </div>
   </div>
 </div>
